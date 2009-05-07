@@ -20,8 +20,8 @@ list(T&...);
 // apply
 extern struct apply_
 {
-template <class F, class...Args>
-auto operator()(type_<F>& f, Args&... a) -> decltype(F()(a...));
+    template <class F, class...Args>
+    auto operator()(type_<F>& f, Args&... a) -> decltype(F()(a...));
 } &apply;
 
 extern struct vector_
@@ -54,14 +54,14 @@ auto fold(Fn& fn, X& x, type_<vector_()>& v) -> decltype(x);
 
 template <class Fn, class X, class H, class...T>
 auto
-fold(type_<Fn>& fn, X& x, type_<vector_(type_<H>&,T...)>& v)
+fold(type<Fn>&, X& x, type_<vector_(type_<H>&,T...)>& v)
     -> decltype(
-                fold(
-                     fn,
-                     Fn()(x, type<H>()),
-                     type<vector_(T...)>()
-                     )
-                );
+        fold(
+            type<Fn>(),
+            Fn()(x, type<H>()),
+            type<vector_(T...)>()
+            )
+        );
 
 template <class T, class U> struct assert_same;
 template <class T> struct assert_same<T,T> {};
