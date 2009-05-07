@@ -54,14 +54,24 @@ auto fold(Fn& fn, X& x, type_<vector_()>& v) -> decltype(x);
 
 template <class Fn, class X, class H, class...T>
 auto
-fold(type<Fn>&, X& x, type_<vector_(type_<H>&,T...)>& v)
+fold(type_<Fn>& fn, type_<X>& x, type_<vector_(type_<H>&,T...)>& v)
+#  if 1
     -> decltype(
-        fold(
-            type<Fn>(),
-            Fn()(x, type<H>()),
-            type<vector_(T...)>()
-            )
-        );
+                fold(
+                     type<Fn>(),
+                     Fn()(type<X>(), type<H>()),
+                     type<vector_(T...)>()
+                     )
+                );
+#  else
+    -> decltype(
+                fold(
+                     fn,
+                     fn(x, type<H>()),
+                     type<vector_(T...)>()
+                     )
+                );
+#  endif 
 
 template <class T, class U> struct assert_same;
 template <class T> struct assert_same<T,T> {};
@@ -102,6 +112,6 @@ assert_same<eval(count(vector(type<int>()))), int[2]> b2;
 assert_same<eval(count(vector(type<int>(),type<long>()))), int[3]> b3;
 
 assert_same<eval(fold(type(cons), type<void>(), vector())), void> a1;
-assert_same<eval(fold(type(cons), type<void>(), vector(type<int>()))), cell<int,void> > a2;
+assert_same<eval(fold(type(cons), type<void>(), vector(type<int>()))), cell<void,int> > a2;
 
 int main() {}
