@@ -10,10 +10,14 @@
 #include "./copy.hpp"
 #include "./push_front.hpp"
 #include "./inserter.hpp"
+#include "./front_inserter.hpp"
 #include "./list.hpp"
 #include "./assert_same.hpp"
 #include "./eval.hpp"
 
 ASSERT_SAME(eval(copy(list(), inserter(type(push_front), list()))), eval(list()));
 ASSERT_SAME(eval(copy(list(type<int>(), type<char>()), inserter(type(push_front), list()))),
+            eval(list(type<char>(), type<int>())));
+
+ASSERT_SAME(eval(copy(list(type<int>(), type<char>()), front_inserter(list()))),
             eval(list(type<char>(), type<int>())));
