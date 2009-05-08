@@ -10,7 +10,7 @@
 #ifndef MPL0X_IDENTITY_HPP_INCLUDED
 #define MPL0X_IDENTITY_HPP_INCLUDED
 
-#include ".\type.hpp"
+#include "./type.hpp"
 
 extern struct identity_ {
     template<class T>
