@@ -1,0 +1,9 @@
+project mpl0x :
+  requirements
+    <toolset>gcc
+    <toolset-gcc:flavor>mingw
+    <toolset-gcc:version>4.4.0
+    <cxxflags>-std=gnu++0x ;
+
+compile test.cpp ;
+compile test_bind.cpp ;

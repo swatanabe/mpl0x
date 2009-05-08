@@ -4,10 +4,11 @@
 #ifndef FOLD_DWA200957_HPP
 # define FOLD_DWA200957_HPP
 
+# include "./apply.hpp"
 # include "./list.hpp"
 # include "./empty.hpp"
 # include "./front.hpp"
-# include "./disable_if.hpp"
+# include "./pop_front.hpp"
 
 extern struct fold_
 {
@@ -22,7 +23,7 @@ extern struct fold_
         -> decltype(
                 fold(
                     type<Fn>(),                          // fn
-                    Fn()(type<X>(), front(type<Seq>())), // fn(x,front(s))
+                    apply(type<Fn>(), type<X>(), front(type<Seq>())), // fn(x,front(s))
                     pop_front(type<Seq>())               // pop_front(s)
                     )
             );
