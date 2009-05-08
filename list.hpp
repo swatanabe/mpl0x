@@ -26,4 +26,7 @@ _false_ empty_impl(type_<list_(Elements...)>&);
 template <class...Elements>
 _true_ empty_impl(type_<list_()>&);
 
+template<class H, class...T>
+type_<list_(type_<H>&, T...)>& push_front_impl(type_<list_(T...)>&, type_<H>&);
+
 #endif // LIST_DWA200957_HPP
