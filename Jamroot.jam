@@ -7,3 +7,4 @@ project mpl0x :
 
 compile test.cpp ;
 compile test_bind.cpp ;
+compile test_if.cpp ;
