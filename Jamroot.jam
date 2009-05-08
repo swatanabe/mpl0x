@@ -9,3 +9,4 @@ compile test.cpp ;
 compile test_bind.cpp ;
 compile test_if.cpp ;
 compile test_push_front.cpp ;
+compile test_copy.cpp ;
